@@ -1,3 +1,7 @@
+
+let userScore = 0
+let computerScore = 0
+
 // Create a function of computerChoice that randomly selects between rps
 function getComputerChoice() {
     let number = Math.floor(Math.random() * 3)
@@ -19,8 +23,6 @@ function getUserChoice() {
 
 // check for the winner
 function playRound (playerSelection, computerSelection) {
-    console.log(playerSelection)
-    console.log(computerSelection)
     if (playerSelection === computerSelection) {
         return "It's a tie!";
     } else if (
@@ -28,13 +30,33 @@ function playRound (playerSelection, computerSelection) {
         (playerSelection === "Paper" && computerSelection === "Rock") ||
         (playerSelection === "Scissors" && computerSelection === "Paper")
     ) {
+        userScore++
         return `You win! ${playerSelection} beats ${computerSelection}`;
     } else {
+        computerScore++
         return `Computer wins! ${computerSelection} beats ${playerSelection}`;
     }
 }
 
-console.log(playRound(getUserChoice(), getComputerChoice()))
 // loop through game 5 times
+function game() {
+    for (let i = 0; i < 5; i++) {
+        console.log(playRound(getUserChoice(), getComputerChoice()));
+
+        console.log(`User: ${userScore}, Computer ${computerScore}`)
+    }
+
+    if (userScore === computerScore) {
+        console.log("Game over. It's a tie!")
+    } else if (userScore > computerScore) {
+        console.log("Game over. You win!")
+    } else {
+        console.log("Game over. Computer wins!")
+    }
+}
+
+game()
+
+
 // keep the score
 // report loser or winner
