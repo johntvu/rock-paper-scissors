@@ -2,9 +2,8 @@
 let userScore = 0
 let computerScore = 0
 
-// Create a function of computerChoice that randomly selects between rps
 function getComputerChoice() {
-    let number = Math.floor(Math.random() * 3)
+    let number = Math.floor(Math.random() * 3);
 
     if (number === 0) {
         return "Rock";
@@ -15,30 +14,27 @@ function getComputerChoice() {
     }
 }
 
-// Ask the user for an input of rps, not case sensitive
 function getUserChoice() {
     let userChoice = prompt('Choose rock, paper, or scissors:')
-    return userChoice.charAt(0).toUpperCase() + userChoice.slice(1).toLowerCase()
+    return userChoice.charAt(0).toUpperCase() + userChoice.slice(1).toLowerCase();
 }
 
-// check for the winner
-function playRound (playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
+function playRound (userSelection, computerSelection) {
+    if (userSelection === computerSelection) {
         return "It's a tie!";
     } else if (
-        (playerSelection === "Rock" && computerSelection === "Scissors") ||
-        (playerSelection === "Paper" && computerSelection === "Rock") ||
-        (playerSelection === "Scissors" && computerSelection === "Paper")
+        (userSelection === "Rock" && computerSelection === "Scissors") ||
+        (userSelection === "Paper" && computerSelection === "Rock") ||
+        (userSelection === "Scissors" && computerSelection === "Paper")
     ) {
         userScore++
-        return `You win! ${playerSelection} beats ${computerSelection}`;
+        return `You win! ${userSelection} beats ${computerSelection}`;
     } else {
         computerScore++
-        return `Computer wins! ${computerSelection} beats ${playerSelection}`;
+        return `Computer wins! ${computerSelection} beats ${userSelection}`;
     }
 }
 
-// loop through game 5 times
 function game() {
     for (let i = 0; i < 5; i++) {
         console.log(playRound(getUserChoice(), getComputerChoice()));
@@ -47,16 +43,13 @@ function game() {
     }
 
     if (userScore === computerScore) {
-        console.log("Game over. It's a tie!")
+        console.log("Game over. It's a tie!");
     } else if (userScore > computerScore) {
-        console.log("Game over. You win!")
+        console.log("Game over. You win!");
     } else {
-        console.log("Game over. Computer wins!")
+        console.log("Game over. Computer wins!");
     }
 }
 
 game()
 
-
-// keep the score
-// report loser or winner
