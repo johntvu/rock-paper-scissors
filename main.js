@@ -14,10 +14,12 @@ function getComputerChoice() {
     }
 }
 
-function getUserChoice() {
-    let userChoice = prompt('Choose rock, paper, or scissors:')
-    return userChoice.charAt(0).toUpperCase() + userChoice.slice(1).toLowerCase();
-}
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const playerScore = document.querySelector('#userScore');
+const compScore = document.querySelector('#computerScore');
+const result = document.querySelector('#result')
 
 function playRound (userSelection, computerSelection) {
     if (userSelection === computerSelection) {
@@ -28,28 +30,43 @@ function playRound (userSelection, computerSelection) {
         (userSelection === "Scissors" && computerSelection === "Paper")
     ) {
         userScore++
+        playerScore.textContent = userScore
         return `You win! ${userSelection} beats ${computerSelection}`;
     } else {
         computerScore++
+        compScore.textContent = computerScore
         return `Computer wins! ${computerSelection} beats ${userSelection}`;
     }
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        console.log(playRound(getUserChoice(), getComputerChoice()));
 
-        console.log(`User: ${userScore}, Computer ${computerScore}`)
-    }
+function checkWinner() {
+    if (playerScore.textContent == 5) {
+        result.textContent = 'Score 5 reached. Player Wins!'
+    } 
 
-    if (userScore === computerScore) {
-        console.log("Game over. It's a tie!");
-    } else if (userScore > computerScore) {
-        console.log("Game over. You win!");
-    } else {
-        console.log("Game over. Computer wins!");
+    else if (compScore.textContent == 5) {
+        result.textContent = 'Score 5 reached. Computer Wins!'
     }
 }
 
-game()
 
+
+rock.addEventListener('click', function() {
+    result.textContent = playRound('Rock', getComputerChoice())
+
+    checkWinner()
+});
+
+
+paper.addEventListener('click', function() {
+    result.textContent = playRound('Paper', getComputerChoice());
+
+    checkWinner()
+});
+
+scissors.addEventListener('click', function() {
+    result.textContent = playRound('Scissors', getComputerChoice());
+
+    checkWinner()
+});
